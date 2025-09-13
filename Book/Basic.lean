@@ -195,3 +195,11 @@ example : (p → q) → (¬q → ¬p) :=
     (fun hnq: ¬q =>
       (fun hp: p =>
         absurd (h hp) hnq)))
+
+
+example: ¬(p ↔ ¬p) :=
+  (
+    fun hpnp: p ↔ ¬p =>
+      have hnp: ¬p := fun hp: p => (hpnp.mp hp) hp
+      hnp (hpnp.mpr hnp)
+  )

@@ -65,5 +65,10 @@ example : p ∨ ¬p :=
 
 example : (((p → q) → p) → p) :=
   (
-    fun hpqp: (p → q) → p => sorry
+    fun hpqp: (p → q) → p =>
+      Or.elim (em p)
+        (fun hp: p =>
+          hp)
+        (fun hnp: ¬p =>
+          hpqp (fun hp: p => absurd hp hnp))
   )
